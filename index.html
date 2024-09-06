@@ -4,44 +4,150 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>September 14th Setlist</title>
+        <title>September 14th Setlist with Speed Control and Reset</title>
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://www.youtube.com/iframe_api"></script>
+        <style>
+            .slider-container {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .reset-btn {
+                background-color: #4299e1;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                display: none;
+            }
+        </style>
     </head>
     <body class="bg-gray-100 p-6">
-        <h1 class="text-3xl font-bold mb-4 text-center">September 14th Setlist</h1>
+        <h1 class="text-3xl font-bold mb-4 text-center">September 14th Setlist with Speed Control</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             <div>
                 <h2 class="text-xl font-semibold mb-2">1. Petrunino in Cm</h2>
-                <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/U2GIRgvhGLs" frameborder="0" allowfullscreen></iframe>
+                <div id="player1"></div>
+                <div class="slider-container">
+                    <label for="speed1">Speed: <span id="speedValue1">100%</span></label>
+                    <input type="range" id="speed1" min="0.33" max="1.33" step="0.01" value="1" oninput="updateSpeed(1, this.value)">
+                    <button class="reset-btn" id="resetBtn1" onclick="resetSpeed(1, 'speed1')">Reset</button>
+                </div>
             </div>
 
             <div>
                 <h2 class="text-xl font-semibold mb-2">2. Na Surce Mi Lezhi in C <span class="text-sm text-gray-600">(minor 3rd lower than recording)</span></h2>
-                <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/cUok2iwNJww" frameborder="0" allowfullscreen></iframe>
+                <div id="player2"></div>
+                <div class="slider-container">
+                    <label for="speed2">Speed: <span id="speedValue2">100%</span></label>
+                    <input type="range" id="speed2" min="0.33" max="1.33" step="0.01" value="1" oninput="updateSpeed(2, this.value)">
+                    <button class="reset-btn" id="resetBtn2" onclick="resetSpeed(2, 'speed2')">Reset</button>
+                </div>
             </div>
 
             <div>
                 <h2 class="text-xl font-semibold mb-2">3. Sonce Se Slega da Zajde in D <span class="text-sm text-gray-600">(transpose to D)</span></h2>
-                <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/bTIt01gZLiU" frameborder="0" allowfullscreen></iframe>
+                <div id="player3"></div>
+                <div class="slider-container">
+                    <label for="speed3">Speed: <span id="speedValue3">100%</span></label>
+                    <input type="range" id="speed3" min="0.33" max="1.33" step="0.01" value="1" oninput="updateSpeed(3, this.value)">
+                    <button class="reset-btn" id="resetBtn3" onclick="resetSpeed(3, 'speed3')">Reset</button>
+                </div>
             </div>
 
             <div>
                 <h2 class="text-xl font-semibold mb-2">4. De Gidi, ludi mladi godini in D</h2>
-                <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/Bm_EMuAVS-c" frameborder="0" allowfullscreen></iframe>
+                <div id="player4"></div>
+                <div class="slider-container">
+                    <label for="speed4">Speed: <span id="speedValue4">100%</span></label>
+                    <input type="range" id="speed4" min="0.33" max="1.33" step="0.01" value="1" oninput="updateSpeed(4, this.value)">
+                    <button class="reset-btn" id="resetBtn4" onclick="resetSpeed(4, 'speed4')">Reset</button>
+                </div>
             </div>
 
             <div>
                 <h2 class="text-xl font-semibold mb-2">5. Domachine Sipi Vino in Am</h2>
-                <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/3wBA5lA0eoI" frameborder="0" allowfullscreen></iframe>
+                <div id="player5"></div>
+                <div class="slider-container">
+                    <label for="speed5">Speed: <span id="speedValue5">100%</span></label>
+                    <input type="range" id="speed5" min="0.33" max="1.33" step="0.01" value="1" oninput="updateSpeed(5, this.value)">
+                    <button class="reset-btn" id="resetBtn5" onclick="resetSpeed(5, 'speed5')">Reset</button>
+                </div>
             </div>
 
             <div>
                 <h2 class="text-xl font-semibold mb-2">6. Gosho Hubaveca in Cm</h2>
-                <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/MyPjA24kwkg" frameborder="0" allowfullscreen></iframe>
+                <div id="player6"></div>
+                <div class="slider-container">
+                    <label for="speed6">Speed: <span id="speedValue6">100%</span></label>
+                    <input type="range" id="speed6" min="0.33" max="1.33" step="0.01" value="1" oninput="updateSpeed(6, this.value)">
+                    <button class="reset-btn" id="resetBtn6" onclick="resetSpeed(6, 'speed6')">Reset</button>
+                </div>
             </div>
 
         </div>
+
+        <script>
+            let players = [];
+
+            function onYouTubeIframeAPIReady() {
+                players[1] = new YT.Player('player1', {
+                    height: '360',
+                    width: '640',
+                    videoId: 'U2GIRgvhGLs'
+                });
+                players[2] = new YT.Player('player2', {
+                    height: '360',
+                    width: '640',
+                    videoId: 'cUok2iwNJww'
+                });
+                players[3] = new YT.Player('player3', {
+                    height: '360',
+                    width: '640',
+                    videoId: 'bTIt01gZLiU'
+                });
+                players[4] = new YT.Player('player4', {
+                    height: '360',
+                    width: '640',
+                    videoId: 'Bm_EMuAVS-c'
+                });
+                players[5] = new YT.Player('player5', {
+                    height: '360',
+                    width: '640',
+                    videoId: '3wBA5lA0eoI'
+                });
+                players[6] = new YT.Player('player6', {
+                    height: '360',
+                    width: '640',
+                    videoId: 'MyPjA24kwkg'
+                });
+            }
+
+            function updateSpeed(playerIndex, speed) {
+                const percentSpeed = Math.round(speed * 100);
+                document.getElementById(`speedValue${playerIndex}`).innerText = `${percentSpeed}%`;
+                
+                const resetButton = document.getElementById(`resetBtn${playerIndex}`);
+                if (percentSpeed !== 100) {
+                    resetButton.style.display = 'inline-block';
+                } else {
+                    resetButton.style.display = 'none';
+                }
+
+                if (players[playerIndex]) {
+                    players[playerIndex].setPlaybackRate(parseFloat(speed));
+                }
+            }
+
+            function resetSpeed(playerIndex, sliderId) {
+                const slider = document.getElementById(sliderId);
+                slider.value = 1;
+                updateSpeed(playerIndex, 1);
+            }
+        </script>
     </body>
     </html>
