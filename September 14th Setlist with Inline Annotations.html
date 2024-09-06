@@ -1,0 +1,71 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>September 14th Setlist</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gray-100 p-6">
+        <h1 class="text-3xl font-bold mb-4 text-center">September 14th Setlist</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div>
+                <h2 class="text-xl font-semibold mb-2">1. Petrunino in Cm</h2>
+                <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/U2GIRgvhGLs" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-2">2. Na Surce Mi Lezhi in C <span class="text-sm text-gray-600">(minor 3rd lower than recording)</span></h2>
+                <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/Bm_EMuAVS-c" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-2">3. Sonce Se Slega da Zajde in D <span class="text-sm text-gray-600">(transpose to D)</span></h2>
+                <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/bTIt01gZLiU" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-2">4. De Gidi, ludi mladi godini in D</h2>
+                <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/Bm_EMuAVS-c" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-2">5. Domachine Sipi Vino in Am</h2>
+                <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/3wBA5lA0eoI" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-2">6. Gosho Hubaveca in Cm</h2>
+                <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/MyPjA24kwkg" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+        </div>
+    <script>window.parent.postMessage({ action: "ready" }, "*"); 
+ 
+window.console = new Proxy(console, {
+  get(target, prop) {
+    if (['log', 'warn', 'error'].includes(prop)) {
+      return new Proxy(target[prop], {
+        apply(fn, thisArg, args) {
+          fn.apply(thisArg, args);
+          window.parent.postMessage({ action: 'console', 
+            type: prop, 
+            args: args.map((arg) => {
+              try {
+                return JSON.stringify(arg).replace(/^["']|["']$/g, '');
+              } catch (e) {
+                return arg;
+              }
+            }) 
+          }, '*');
+        }
+      });
+    }
+    return target[prop];
+  }
+});
+</script></body>
+    </html>
