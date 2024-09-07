@@ -1,136 +1,191 @@
+    <!DOCTYPE html>  
+    <html lang="en">  
+    <head>  
+        <meta charset="UTF-8">  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+        <title>Uşşak Makamı</title>  
+        <script src="https://cdn.tailwindcss.com"></script>  
+        <style>  
+            .key {  
+                width: 80vw; /* 80% of the viewport width */  
+                max-width: 600px; /* Optional max width for larger screens */  
+                height: 60px;  
+                margin: 2px;  
+                background-color: white;  
+                border: 1px solid black;  
+                border-radius: 5px;  
+                position: relative;  
+                text-align: center;  
+                line-height: 60px;  
+                font-weight: bold;  
+                display: flex;  
+                align-items: center;  
+                justify-content: center;  
+                font-size: 1rem;  
+                padding: 10px;  
+                transition: background-color 0.2s;  
+                position: relative;  
+            }  
+            .key.active {  
+                background-color: lightblue;  
+            }  
+            .clickable-area {  
+                position: absolute;  
+                left: 0;  
+                top: 0;  
+                width: 25%;  
+                height: 100%;  
+                background-color: rgba(0, 0, 0, 0.1);  
+                cursor: pointer;  
+                display: flex;  
+                align-items: center;  
+                justify-content: center;  
+                border-radius: 5px 0 0 5px;  
+            }  
+            .clickable-area::after {  
+                content: '▶';  
+                font-size: 1.5rem;  
+                color: black;  
+            }  
+            .slider {  
+                width: 150px;  
+                margin-left: 20px;  
+            }  
+            .key-container {  
+                display: flex;  
+                flex-direction: column;  
+                align-items: center;  
+            }  
+            .flex-center {  
+                display: flex;  
+                align-items: center;  
+                justify-content: center;  
+            }  
+        </style>  
+    </head>  
+    <body class="flex flex-col items-center justify-center h-screen bg-gray-100">  
+        <h1 class="text-2xl font-bold mb-4">Uşşak Makamı</h1>  
+        <div id="keyboard" class="key-container">  
+            <div class="key flex-center" data-note="G2" data-key="K">  
+                <div class="clickable-area" data-note="G2"></div>  
+                G (K) - 392 Hz  
+            </div>  
+            <div class="key flex-center" data-note="F" data-key="J">  
+                <div class="clickable-area" data-note="F"></div>  
+                F (J) - 698.46 Hz  
+            </div>  
+            <div class="key flex-center" data-note="D#" data-key="H">  
+                <div class="clickable-area" data-note="D#"></div>  
+                D♯/E♭ (H) - 622.25 Hz  
+            </div>  
+            <div class="key flex-center" data-note="D" data-key="G">  
+                <div class="clickable-area" data-note="D"></div>  
+                D (G) - 587.33 Hz  
+            </div>  
+            <div class="key flex-center" data-note="C" data-key="F">  
+                <div class="clickable-area" data-note="C"></div>  
+                C (F) - 523.25 Hz  
+            </div>  
+            <div class="key flex-center" data-note="A#">  
+                <div class="clickable-area" data-note="A#"></div>  
+                A♯/B♭ (D) - 466.16 Hz  
+            </div>  
+            <div class="key flex-center" data-note="A-">  
+                <div class="clickable-area" data-note="A-"></div>  
+                A- (S)  
+                <input type="range" min="392" max="466.16" value="433.70" step="0.1" class="slider" id="pitchSlider">  
+                <span class="ml-2"><span id="sliderValue">433.70</span> Hz</span>  
+            </div>  
+            <div class="key flex-center" data-note="G" data-key="A">  
+                <div class="clickable-area" data-note="G"></div>  
+                G (A) - 783.99 Hz  
+            </div>  
+        </div>  
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Uşşak Makamı</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <style>
-            .key {
-                width: 400px;
-                height: 60px;
-                margin: 2px;
-                background-color: white;
-                border: 1px solid black;
-                border-radius: 5px;
-                position: relative;
-                text-align: center;
-                line-height: 60px;
-                font-weight: bold;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1rem; /* Smaller font size */
-                padding: 10px;
-                transition: background-color 0.2s;
-            }
-            .key.active {
-                background-color: lightblue;
-            }
-            .slider {
-                width: 150px;
-                margin-left: 20px;
-            }
-            .key-container {
-                display: flex;
-                flex-direction: column;
-            }
-            .flex-center {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        </style>
-    </head>
-    <body class="flex flex-col items-center justify-center h-screen bg-gray-100">
-        <h1 class="text-2xl font-bold mb-4">Uşşak Makamı</h1>
-        <div id="keyboard" class="key-container">
-            <div class="key flex-center" data-note="G2" data-key="K">G (K) - 783.99 Hz</div>
-            <div class="key flex-center" data-note="F" data-key="J">F (J) - 698.46 Hz</div>
-            <div class="key flex-center" data-note="D#" data-key="H">D♯/E♭ (H) - 622.25 Hz</div>
-            <div class="key flex-center" data-note="D" data-key="G">D (G) - 587.33 Hz</div>
-            <div class="key flex-center" data-note="C" data-key="F">C (F) - 523.25 Hz</div>
-            <div class="key flex-center" data-note="A#">A♯/B♭ (D) - 466.16 Hz</div>
-            <div class="key flex-center" data-note="A-">
-                A- (S)
-                <input type="range" min="392" max="466.16" value="433.70" step="0.1" class="slider" id="pitchSlider">
-                <span class="ml-2"><span id="sliderValue">433.70</span> Hz</span>
-            </div>
-            <div class="key flex-center" data-note="G" data-key="A">G (A) - 392 Hz</div>
-        </div>
+        <script>  
+            const ussakBuselikScale = {  
+                "G": 392.00,   // Ussak Root  
+                "A-": 433.70,  // Adjusted slightly less than a whole step  
+                "A#": 466.16,  // Ussak Half step  
+                "C": 523.25,   // Ussak Whole step / Buselik Root  
+                "D": 587.33,   // Buselik Whole step  
+                "D#": 622.25,  // Buselik Half step  
+                "F": 698.46,   // Buselik Whole step  
+                "G2": 783.99   // Buselik Whole step  
+            };  
 
-        <script>
-            const ussakBuselikScale = {
-                "G": 392.00,   // Ussak Root
-                "A-": 433.70,  // Adjusted slightly less than a whole step
-                "A#": 466.16,  // Ussak Half step
-                "C": 523.25,   // Ussak Whole step / Buselik Root
-                "D": 587.33,   // Buselik Whole step
-                "D#": 622.25,  // Buselik Half step
-                "F": 698.46,   // Buselik Whole step
-                "G2": 783.99   // Buselik Whole step
-            };
+            const keyMap = {  
+                "A": "G",  
+                "S": "A-",  
+                "D": "A#",  
+                "F": "C",  
+                "G": "D",  
+                "H": "D#",  
+                "J": "F",  
+                "K": "G2"  
+            };  
 
-            const keyMap = {
-                "A": "G",
-                "S": "A-",
-                "D": "A#",
-                "F": "C",
-                "G": "D",
-                "H": "D#",
-                "J": "F",
-                "K": "G2"
-            };
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();  
 
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            document.addEventListener('keydown', (event) => {  
+                const note = keyMap[event.key.toUpperCase()];  
+                if (note) {  
+                    playSound(ussakBuselikScale[note]);  
+                    highlightKey(note);  
+                }  
+            });  
 
-            document.addEventListener('keydown', (event) => {
-                const note = keyMap[event.key.toUpperCase()];
-                if (note) {
-                    playSound(ussakBuselikScale[note]);
-                    highlightKey(note);
-                }
-            });
+            document.addEventListener('keyup', (event) => {  
+                const note = keyMap[event.key.toUpperCase()];  
+                if (note) {  
+                    unhighlightKey(note);  
+                }  
+            });  
 
-            document.addEventListener('keyup', (event) => {
-                const note = keyMap[event.key.toUpperCase()];
-                if (note) {
-                    unhighlightKey(note);
-                }
-            });
+            document.querySelectorAll('.clickable-area').forEach(clickableArea => {  
+                clickableArea.addEventListener('mousedown', () => {  
+                    const note = clickableArea.getAttribute('data-note');  
+                    playSound(ussakBuselikScale[note]);  
+                    highlightKey(note);  
+                });  
 
-            function playSound(frequency) {
-                const oscillator = audioContext.createOscillator();
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-                oscillator.connect(audioContext.destination);
-                oscillator.start();
-                oscillator.stop(audioContext.currentTime + 0.5);
-            }
+                clickableArea.addEventListener('mouseup', () => {  
+                    const note = clickableArea.getAttribute('data-note');  
+                    unhighlightKey(note);  
+                });  
+            });  
 
-            function highlightKey(note) {
-                const keyElement = document.querySelector(`.key[data-note="${note}"]`);
-                if (keyElement) {
-                    keyElement.classList.add('active');
-                }
-            }
+            function playSound(frequency) {  
+                const oscillator = audioContext.createOscillator();  
+                oscillator.type = 'sine';  
+                oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);  
+                oscillator.connect(audioContext.destination);  
+                oscillator.start();  
+                oscillator.stop(audioContext.currentTime + 0.5);  
+            }  
 
-            function unhighlightKey(note) {
-                const keyElement = document.querySelector(`.key[data-note="${note}"]`);
-                if (keyElement) {
-                    keyElement.classList.remove('active');
-                }
-            }
+            function highlightKey(note) {  
+                const keyElement = document.querySelector(`.key[data-note="${note}"]`);  
+                if (keyElement) {  
+                    keyElement.classList.add('active');  
+                }  
+            }  
 
-            const slider = document.getElementById('pitchSlider');
-            const sliderValueDisplay = document.getElementById('sliderValue');
+            function unhighlightKey(note) {  
+                const keyElement = document.querySelector(`.key[data-note="${note}"]`);  
+                if (keyElement) {  
+                    keyElement.classList.remove('active');  
+                }  
+            }  
 
-            slider.addEventListener('input', (event) => {
-                const frequency = parseFloat(event.target.value);
-                ussakBuselikScale["A-"] = frequency;
-                sliderValueDisplay.textContent = frequency.toFixed(2);
-            });
-        </script>
-    </body>
-    </html>
+            const slider = document.getElementById('pitchSlider');  
+            const sliderValueDisplay = document.getElementById('sliderValue');  
+
+            slider.addEventListener('input', (event) => {  
+                const frequency = parseFloat(event.target.value);  
+                ussakBuselikScale["A-"] = frequency;  
+                sliderValueDisplay.textContent = frequency.toFixed(2);  
+            });  
+        </script>  
+    </body>  
+    </html>  
